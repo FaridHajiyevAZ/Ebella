@@ -1,0 +1,21 @@
+# Dependencies (rebuildable with `npm install`)
+node_modules/
+
+# Environment variables (contains secrets — NEVER commit)
+.env
+.env.local
+
+# Logs
+npm-debug.log*
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor folders
+.vscode/
+.idea/
+
+# Uploaded product images (user-generated content, not source code)
+public/images/uploads/
