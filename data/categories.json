@@ -1,0 +1,40 @@
+[
+  {
+    "slug": "mattresses",
+    "name": "Döşəklər",
+    "position": 1,
+    "subcategories": [
+      { "slug": "orthopedic-mattresses", "name": "Ortopedik döşəklər", "position": 1 },
+      { "slug": "spring-mattresses",     "name": "Yay döşəkləri",      "position": 2 },
+      { "slug": "memory-foam",           "name": "Memory foam",        "position": 3 },
+      { "slug": "kids-mattresses",       "name": "Uşaq döşəkləri",     "position": 4 },
+      { "slug": "pillows",               "name": "Yastıqlar",          "position": 5 }
+    ]
+  },
+  {
+    "slug": "home-furniture",
+    "name": "Ev mebelləri",
+    "position": 2,
+    "subcategories": [
+      { "slug": "sofas",            "name": "Divanlar",                     "position": 1 },
+      { "slug": "bedroom-sets",     "name": "Yataq dəstləri",               "position": 2 },
+      { "slug": "living-room-sets", "name": "Qonaq otağı dəstləri",         "position": 3 },
+      { "slug": "dining",           "name": "Yemək masaları və stulları",   "position": 4 },
+      { "slug": "kitchen",          "name": "Mətbəx mebelləri",             "position": 5 },
+      { "slug": "kids-room",        "name": "Uşaq otağı",                   "position": 6 },
+      { "slug": "wardrobes",        "name": "Şkaflar və komodlar",          "position": 7 }
+    ]
+  },
+  {
+    "slug": "office-furniture",
+    "name": "Ofis mebelləri",
+    "position": 3,
+    "subcategories": [
+      { "slug": "office-desks",      "name": "Ofis masaları",       "position": 1 },
+      { "slug": "office-chairs",     "name": "Ofis kresloları",     "position": 2 },
+      { "slug": "conference-tables", "name": "Konfrans masaları",   "position": 3 },
+      { "slug": "file-cabinets",     "name": "Sənəd şkafları",      "position": 4 },
+      { "slug": "reception",         "name": "Resepşn mebelləri",   "position": 5 }
+    ]
+  }
+]
