@@ -10,80 +10,88 @@ const products = JSON.parse(
 
 const errors = [];
 
-const categorySlugs = new Set();
+const categoryIds = new Set();
 const subcategoryIndex = {};
 
 for (const c of categories) {
-  if (!c.slug || !c.name) {
-    errors.push(`Category missing slug or name: ${JSON.stringify(c)}`);
+  if (!c.id || !c.name) {
+    errors.push(`Category missing id or name: ${JSON.stringify(c)}`);
     continue;
   }
-  if (categorySlugs.has(c.slug)) {
-    errors.push(`Duplicate category slug: ${c.slug}`);
+  if (categoryIds.has(c.id)) {
+    errors.push(`Duplicate category id: ${c.id}`);
   }
-  categorySlugs.add(c.slug);
+  categoryIds.add(c.id);
 
-  const subSlugs = new Set();
+  const subIds = new Set();
   for (const s of c.subcategories || []) {
-    if (!s.slug || !s.name) {
-      errors.push(`Subcategory missing slug or name in ${c.slug}: ${JSON.stringify(s)}`);
+    if (!s.id || !s.name) {
+      errors.push(`Subcategory missing id or name in ${c.id}: ${JSON.stringify(s)}`);
       continue;
     }
-    if (subSlugs.has(s.slug)) {
-      errors.push(`Duplicate subcategory slug in ${c.slug}: ${s.slug}`);
+    if (subIds.has(s.id)) {
+      errors.push(`Duplicate subcategory id in ${c.id}: ${s.id}`);
     }
-    subSlugs.add(s.slug);
-    subcategoryIndex[s.slug] = c.slug;
+    subIds.add(s.id);
+    subcategoryIndex[s.id] = c.id;
   }
 }
 
-const productSlugs = new Set();
+const productIds = new Set();
 const skuSet = new Set();
 let variantCount = 0;
 
 for (const p of products) {
-  if (!p.slug || !p.name) {
-    errors.push(`Product missing slug or name: ${JSON.stringify(p)}`);
+  if (!p.id || !p.name) {
+    errors.push(`Product missing id or name: ${JSON.stringify(p)}`);
     continue;
   }
-  if (productSlugs.has(p.slug)) {
-    errors.push(`Duplicate product slug: ${p.slug}`);
+  if (productIds.has(p.id)) {
+    errors.push(`Duplicate product id: ${p.id}`);
   }
-  productSlugs.add(p.slug);
+  productIds.add(p.id);
 
-  if (!categorySlugs.has(p.category_slug)) {
-    errors.push(`Product "${p.slug}" refers to unknown category: ${p.category_slug}`);
+  if (!categoryIds.has(p.categoryId)) {
+    errors.push(`Product "${p.id}" refers to unknown categoryId: ${p.categoryId}`);
   }
-  if (subcategoryIndex[p.subcategory_slug] !== p.category_slug) {
+  if (subcategoryIndex[p.subcategoryId] !== p.categoryId) {
     errors.push(
-      `Product "${p.slug}": subcategory "${p.subcategory_slug}" does not belong to category "${p.category_slug}"`
+      `Product "${p.id}": subcategoryId "${p.subcategoryId}" does not belong to categoryId "${p.categoryId}"`
     );
   }
 
   if (!Array.isArray(p.variants) || p.variants.length === 0) {
-    errors.push(`Product "${p.slug}" has no variants`);
+    errors.push(`Product "${p.id}" has no variants`);
     continue;
   }
 
   for (const v of p.variants) {
     variantCount++;
     if (!v.sku) {
-      errors.push(`Product "${p.slug}" has a variant without SKU`);
+      errors.push(`Product "${p.id}" has a variant without sku`);
     } else if (skuSet.has(v.sku)) {
-      errors.push(`Duplicate SKU: ${v.sku}`);
+      errors.push(`Duplicate sku: ${v.sku}`);
     } else {
       skuSet.add(v.sku);
     }
-    if (!v.color_name) {
-      errors.push(`Variant "${v.sku || '?'}" in product "${p.slug}" missing color_name`);
+    if (!v.colorName) {
+      errors.push(`Variant "${v.sku || '?'}" in product "${p.id}" missing colorName`);
     }
     if (typeof v.price !== 'number' || v.price < 0) {
-      errors.push(`Variant "${v.sku || '?'}" in product "${p.slug}" has invalid price`);
+      errors.push(`Variant "${v.sku || '?'}" in product "${p.id}" has invalid price`);
     }
     if (!Array.isArray(v.images) || v.images.length === 0) {
       errors.push(
-        `Variant "${v.sku || '?'}" in product "${p.slug}" has no images (at least 1 required)`
+        `Variant "${v.sku || '?'}" in product "${p.id}" has no images (at least 1 required)`
       );
+    } else {
+      v.images.forEach((img, j) => {
+        if (!img || !img.imageUrl) {
+          errors.push(
+            `Variant "${v.sku || '?'}" in product "${p.id}" image[${j}] missing imageUrl`
+          );
+        }
+      });
     }
   }
 }
