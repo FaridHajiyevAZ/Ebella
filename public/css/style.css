@@ -17,6 +17,12 @@ body {
   padding: 1rem;
 }
 
+.muted {
+  color: #888;
+}
+
+/* ---- Header / footer ---- */
+
 .site-header {
   background: #fff;
   border-bottom: 1px solid #eee;
@@ -51,7 +57,7 @@ main {
 }
 
 main h1 {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .site-footer {
@@ -60,4 +66,180 @@ main h1 {
   text-align: center;
   padding: 1rem 0;
   color: #888;
+}
+
+/* ---- Product grid (homepage) ---- */
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.product-card {
+  display: block;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.product-card-image {
+  aspect-ratio: 1 / 1;
+  background: #f5f5f5;
+}
+
+.product-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.product-card-body {
+  padding: 0.75rem 1rem 1rem;
+}
+
+.product-card-body h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+/* ---- Product detail ---- */
+
+.product-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 720px) {
+  .product-detail {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gallery .main-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: #f5f5f5;
+  border-radius: 8px;
+  display: block;
+}
+
+.thumbs {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  background: #f5f5f5;
+}
+
+.thumb.active {
+  border-color: #222;
+}
+
+.product-info h1 {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.price {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #c0392b;
+  margin: 0.25rem 0 1rem;
+}
+
+.description {
+  margin-bottom: 1.25rem;
+  color: #444;
+}
+
+/* ---- Variant picker (color swatches) ---- */
+
+.variant-picker {
+  margin-bottom: 1.25rem;
+}
+
+.swatches {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.swatch {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.1s ease;
+}
+
+.swatch:hover {
+  transform: scale(1.05);
+}
+
+.swatch.active {
+  border-color: #222;
+  box-shadow: 0 0 0 2px #fff inset;
+}
+
+/* ---- Stock badge ---- */
+
+.stock {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: #2c7a3a;
+  font-weight: 500;
+}
+
+.stock.low {
+  color: #c87f00;
+}
+
+.stock.out {
+  color: #b03030;
+}
+
+/* ---- WhatsApp button ---- */
+
+.whatsapp-btn {
+  display: inline-block;
+  background: #25d366;
+  color: #fff;
+  border: none;
+  padding: 0.9rem 1.4rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.whatsapp-btn:hover {
+  background: #1ebe57;
 }
